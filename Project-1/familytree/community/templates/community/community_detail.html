@@ -1,31 +1,31 @@
-{% extends "groups/group_base.html" %}
+{% extends "community/community_base.html" %}
 
-{% block pregroup %}
+{% block precommunity %}
 <div class="container">
-  <h1>{{group.name}}</h1>
-  <h2> Member Count: {{group.members.count}}</h2>
+  <h1>{{community.name}}</h1>
+  <h2> Member Count: {{community.members.count}}</h2>
 
   <div class="content">
-  	{% if user in group.members.all %}
-  		<a href="{% url 'groups:leave' slug=group.slug %}" class="btn btn-lg btn-warning"><span class="fa fa-times-circle-o"></span> Leave</a>
+  	{% if user in community.members.all %}
+  		<a href="{% url 'community:leave' slug=community.slug %}" class="btn btn-lg btn-warning"><span class="fa fa-times-circle-o"></span> Leave</a>
   	{% else %}
-  		<a href="{% url 'groups:join' slug=group.slug %}" class="btn btn-lg btn-warning"><span class="fa fa-check-circle-o"></span> Join</a>
+  		<a href="{% url 'community:join' slug=group.slug %}" class="btn btn-lg btn-warning"><span class="fa fa-check-circle-o"></span> Join</a>
   	{% endif %}
 
   </div>
 </div>
 {% endblock %}
 
-{% block group_content %}
+{% block community_content %}
 
 <div class="col-md-8">
-	{% if group.posts.count == 0 %}
-	<h2>No posts in this group yet!</h2>
+	{% if community.member.count == 0 %}
+	<h2>No Member in this community yet!</h2>
 
 	{% else %}
 
-		{% for post in group.posts.all %}
-			{% include "posts/_post.html" %}
+		{% for member in community.member.all %}
+			{% include "member/_member.html" %}
 		{% endfor %}
 
 	{% endif %}

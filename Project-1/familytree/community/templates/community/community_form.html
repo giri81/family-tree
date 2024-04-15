@@ -1,10 +1,10 @@
-{% extends "groups/group_base.html" %}
+{% extends "community/community_base.html" %}
 {% load bootstrap4 %}
 
-{% block group_content %}
+{% block community_content %}
 <div class="container">
-  <h4>Create A New Group</h4>
-  <form method="POST" action="{% url 'groups:create' %}" id="groupForm">
+  <h4>Create A New Community</h4>
+  <form method="POST" action="{% url 'community:create' %}" id="groupForm">
   	{% csrf_token %}
   	{% bootstrap_form form %}
     {% buttons %}
