@@ -24,48 +24,48 @@ class ListCommunity(generic.ListView):
     model = Community
 
 
-class JoinGroup(LoginRequiredMixin, generic.RedirectView):
+class JoinCommunity(LoginRequiredMixin, generic.RedirectView):
 
     def get_redirect_url(self, *args, **kwargs):
-        return reverse("groups:single", kwargs={"slug": self.kwargs.get("slug")})
+        return reverse("community:single", kwargs={"slug": self.kwargs.get("slug")})
 
     def get(self, request, *args, **kwargs):
-        group = get_object_or_404(Group, slug=self.kwargs.get("slug"))
+        community = get_object_or_404(Community, slug=self.kwargs.get("slug"))
 
         try:
-            GroupMember.objects.create(user=self.request.user, group=group)
+            CommunityMember.objects.create(user=self.request.user, group=community)
 
         except IntegrityError:
-            messages.warning(self.request, ("Warning, already a member of {}".format(group.name)))
+            messages.warning(self.request, ("Warning, already a member of {}".format(community.name)))
 
         else:
-            messages.success(self.request, "You are now a member of the {} group.".format(group.name))
+            messages.success(self.request, "You are now a member of the {} group.".format(community.name))
 
         return super().get(request, *args, **kwargs)
 
 
-class LeaveGroup(LoginRequiredMixin, generic.RedirectView):
+class LeaveCommunity(LoginRequiredMixin, generic.RedirectView):
 
     def get_redirect_url(self, *args, **kwargs):
-        return reverse("groups:single", kwargs={"slug": self.kwargs.get("slug")})
+        return reverse("community:single", kwargs={"slug": self.kwargs.get("slug")})
 
     def get(self, request, *args, **kwargs):
         try:
-            membership = models.GroupMember.objects.filter(
+            membership = models.CommunityMember.objects.filter(
                 user=self.request.user,
                 group__slug=self.kwargs.get("slug")
             ).get()
 
-        except models.GroupMember.DoesNotExist:
+        except models.CommunityMember.DoesNotExist:
             messages.warning(
                 self.request,
-                "You can't leave this group because you aren't in it."
+                "You can't leave this community because you aren't in it."
             )
 
         else:
             membership.delete()
             messages.success(
                 self.request,
-                "You have successfully left this group."
+                "You have successfully left this community."
             )
         return super().get(request, *args, **kwargs)
