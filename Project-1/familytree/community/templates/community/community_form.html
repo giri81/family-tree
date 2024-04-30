@@ -4,7 +4,7 @@
 {% block community_content %}
 <div class="container">
   <h4>Create A New Community</h4>
-  <form method="POST" action="{% url 'community:create' %}" id="groupForm">
+  <form method="POST" action="{% url 'communities:create' %}" id="groupForm">
   	{% csrf_token %}
   	{% bootstrap_form form %}
     {% buttons %}

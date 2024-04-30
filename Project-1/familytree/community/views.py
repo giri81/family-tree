@@ -27,13 +27,13 @@ class ListCommunity(generic.ListView):
 class JoinCommunity(LoginRequiredMixin, generic.RedirectView):
 
     def get_redirect_url(self, *args, **kwargs):
-        return reverse("community:single", kwargs={"slug": self.kwargs.get("slug")})
+        return reverse('communities:single', kwargs={'slug': self.kwargs.get('slug')})
 
     def get(self, request, *args, **kwargs):
-        community = get_object_or_404(Community, slug=self.kwargs.get("slug"))
+        community = get_object_or_404(Community, slug=self.kwargs.get('slug'))
 
         try:
-            CommunityMember.objects.create(user=self.request.user, group=community)
+            CommunityMember.objects.create(user=self.request.user, community=community)
 
         except IntegrityError:
             messages.warning(self.request, ("Warning, already a member of {}".format(community.name)))
@@ -47,7 +47,7 @@ class JoinCommunity(LoginRequiredMixin, generic.RedirectView):
 class LeaveCommunity(LoginRequiredMixin, generic.RedirectView):
 
     def get_redirect_url(self, *args, **kwargs):
-        return reverse("community:single", kwargs={"slug": self.kwargs.get("slug")})
+        return reverse('communities:single', kwargs={'slug': self.kwargs.get('slug')})
 
     def get(self, request, *args, **kwargs):
         try:

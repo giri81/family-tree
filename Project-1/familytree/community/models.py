@@ -34,7 +34,7 @@ class Community(models.Model):
         super().save(*args, **kwargs)
 
     def get_absolute_url(self):
-        return reverse("community:single", kwargs={"slug": self.slug})
+        return reverse("communities:single", kwargs={"slug": self.slug})
 
     class Meta:
         ordering = ["name"]

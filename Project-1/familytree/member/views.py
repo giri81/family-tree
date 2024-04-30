@@ -25,7 +25,7 @@ class UserMember(generic.ListView):
 
     def get_queryset(self):
         try:
-            self.member_user = User.objects.prefetch_related("member").get(
+            self.member.user = User.objects.prefetch_related("member").get(
                 username__iexact=self.kwargs.get("username")
             )
         except User.DoesNotExist:

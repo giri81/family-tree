@@ -1,10 +1,22 @@
 <div class="media">
-	<h3 class="mr-5"><a href="{% url 'member:for_user' username=member.user.username %}">@{{ member.user.username }}</a></h3>
+	<h3 class="mr-5">
+		<a href="{% url 'member:for_user' username=member.user.username %}">
+		@{{ member.user.username }}
+		</a>
+	</h3>
 
 	<div class="media-body">
-		<strong>{{ member.user.username }}</strong>
-		<h5>{{ member.message_html|safe }}</h5>
-			<time class="time"><a href="{% url 'member:single' username=member.user.username pk=member.pk %}">{{ member.created_at }}</a></time>
+		<strong>
+			{{ member.user.username }}
+		</strong>
+		<h5>
+			{{ member.message_html|safe }}
+		</h5>
+			<time class="time">
+				<a href="{% url 'member:single' username=member.user.username pk=member.pk %}">
+					{{ member.created_at }}
+				</a>
+			</time>
 			{% if member.community %}
 			<span class="group-name">in <a href="#">{{ member.community.name }}</a></span>
 			{% endif %}

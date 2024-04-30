@@ -7,9 +7,9 @@
 
   <div class="content">
   	{% if user in community.members.all %}
-  		<a href="{% url 'community:leave' slug=community.slug %}" class="btn btn-lg btn-warning"><span class="fa fa-times-circle-o"></span> Leave</a>
+  		<a href="{% url 'communities:leave' slug=community.slug %}" class="btn btn-lg btn-warning"><span class="fa fa-times-circle-o"></span> Leave</a>
   	{% else %}
-  		<a href="{% url 'community:join' slug=community.slug %}" class="btn btn-lg btn-warning"><span class="fa fa-check-circle-o"></span> Join</a>
+  		<a href="{% url 'communities:join' slug=community.slug %}" class="btn btn-lg btn-warning"><span class="fa fa-check-circle-o"></span> Join</a>
   	{% endif %}
 
   </div>

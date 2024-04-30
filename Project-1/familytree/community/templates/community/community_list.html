@@ -6,16 +6,25 @@
 		{% if user.is_authenticated %}
 		<h2>
 			Welcome back
-			<a href="{% url 'member:for_user' username=user.username %}">@{{user.username }}</a>
+			<a href="{% url 'member:for_user' username=user.username %}">
+				@{{user.username }}
+			</a>
 		</h2>
 
     {% endif %}
 			<h2>Community</h2>
 
-			<p>Welcome to the Community Page! <br>Select a Community with a shared interest!</p>
+			<p>Welcome to the Community Page!
+				<br>Select a Community with a shared interest!
+			</p>
 	</div>
 	{% if user.is_authenticated %}
-	<a href="{% url 'community:create' %}" class="btn btn-warning" role="button"><span class="fa fa-plus"></span> Create New Community!</a>
+	<a href="{% url 'communities:create' %}" class="btn btn-warning" role="button">
+		<span class="fa fa-plus">
+
+		</span>
+		Create New Community!
+	</a>
 	{% endif %}
 </div>
 {% endblock %}
@@ -24,15 +33,19 @@
 <div class="col-md-8">
 	<div class="list-group">
 		{% for community in object_list %}
-		<a href="{% url 'community:single' slug=community.slug %}"
+		<a href="{% url 'communities:single' slug=community.slug %}"
 		class="list-group-item list-group-item-action flex-column align-items-start">
 			<h3 class="mb-1">{{ community.name }}</h3>
 			<p class="mb-1">{{ community.description_html|safe }}</p>
 			<div class="d-flex w-40 justify-content-between">
 				<small class="text-muted"><span class="badge badge-secondary">
-					{{ community.members.count }}</span> member{{ community.members.count|pluralize }}</small>
+					{{ community.members.count }}</span>
+					member{{ community.members.count|pluralize }}
+				</small>
 				<small class="text-muted"><span class="badge badge-secondary">
-					{{ community.member.count }}</span> member{{ community.member.count|pluralize }}</small>
+					{{ community.member.count }}</span>
+					member{{ community.member.count|pluralize }}
+				</small>
 			<span></span><span></span>
 			</div>
 		</a>
