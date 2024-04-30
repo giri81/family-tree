@@ -53,7 +53,7 @@ class LeaveCommunity(LoginRequiredMixin, generic.RedirectView):
         try:
             membership = models.CommunityMember.objects.filter(
                 user=self.request.user,
-                group__slug=self.kwargs.get("slug")
+                community__slug=self.kwargs.get("slug")
             ).get()
 
         except models.CommunityMember.DoesNotExist:
