@@ -11,7 +11,7 @@
 
 				{% for member_community in get_user_groups %}
 				<li class="group li-with-bullet">
-					<a href="{% url 'communities:single' slug=member_community.community.slug %}">{{ member_group.group.name }}</a>
+					<a href="{% url 'communities:single' slug=member_community.community.slug %}">{{ member_community.community.name }}</a>
 				</li>
 				{% endfor %}
 
